@@ -35,6 +35,7 @@
 ExportedObj/
 .consulo/
 *.csproj
+!CWAPI/CWAPI.csproj
 *.unityproj
 *.sln
 *.suo

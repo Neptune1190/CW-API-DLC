@@ -142,6 +142,11 @@ public abstract class ModdedTileType
         static TileType currentTileType;
         public static bool Prefix(Tile tile, ref TileObject __instance, ref GameObject[] ____textParentGOs, ref GameObject[] ____tileMeshGOs)
         {
+            if (__instance == null || (tile == null && __instance.MyTile == null))
+            {
+                return true;
+            }
+
             if (!normalGlitchMeshes.ContainsKey(__instance))
             {
                 normalGlitchMeshes[__instance] = GameObject.Instantiate(____tileMeshGOs[11], ____tileMeshGOs[11].transform.parent, false);
@@ -160,7 +165,7 @@ public abstract class ModdedTileType
             }
             else 
             {
-                currentTileType = __instance.MyTile.MyTileType;
+                currentTileType = __instance.MyTile?.MyTileType ?? TileType.Normal;
                 if (__instance.MyTile?.MyTileType > TileType.Glitch)
                     __instance.MyTile.MyTileType = TileType.Glitch;
             }
@@ -174,9 +179,19 @@ public abstract class ModdedTileType
         [HarmonyPriority(Priority.First)]
         public static void Postfix(ref TileObject __instance, ref Renderer ____tileRenderer, ref string ____displayedTileValue, ref Color ____textColor, ref Color ____scoreColor, ref GameObject[] ____tileMeshGOs, ref Renderer[] ____tileRenderers, ref OutlineFx.OutlineFx[] ____outlines, ref GameObject[] ____textParentGOs, ref GameObject ____crossOutGO, ref GameObject ____scatteredItemParentGO, ref ItemObject ____scatteredItemObject, ref TextMeshPro ____letterTMP, ref TextMeshPro[] ____letterTMPs, ref TextMeshPro[] ____scoreTMPs, ref TextMeshPro ____scoreTMP, ref CharacterWobble ____characterWobble, ref TextMeshPro ____suitTMP, ref int ____currentLightLayer, ref Color[] ____suitColors)
         {
+            if (__instance == null || __instance.MyTile == null)
+            {
+                return;
+            }
+
             __instance?.MyTile?.MyTileType = currentTileType;
 
             ModdedTileType tileType = TileUtils.ModdedTileTypes.FirstOrDefault(t => t.tileType == currentTileType);
+            if (____scoreTMP == null)
+            {
+                return;
+            }
+
             ____scoreTMP.SetText(__instance.MyTile.GetValue().ToString());
 
             if (tileType == null) return;

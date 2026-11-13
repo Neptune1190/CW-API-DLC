@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>CWAPI</AssemblyName>
+    <RootNamespace>CWAPI</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <OutputPath>bin\$(Configuration)\net472\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <GameAssemblies Include="..\lib\*.dll" />
+    <GameAssemblies Include="..\lib\lib\*.dll" />
+    <Reference Include="@(GameAssemblies)" />
+  </ItemGroup>
+</Project>
