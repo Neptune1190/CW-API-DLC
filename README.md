@@ -14,3 +14,11 @@ Features Included
 * Utilities To More Easily Use Modded Items, Characters, Tiles, And Challenges
 
 <sub>Credit To Neptune For The Dev Console</sub>
+
+
+
+----------------------------------------------
+
+AI DISCLOSURE
+
+Copilot was used EXCLUSIVELY for helping me with GIT and to help push these changes, all code was written by myself, with no AI help or assistance outside of me struggling with git for 20 minutes.
